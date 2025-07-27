@@ -7,3 +7,6 @@ spec:
     - name: "22181"
       port: 22181
       targetPort: 2181
+  selector:
+    app: zookeeper
+  type: ClusterIP

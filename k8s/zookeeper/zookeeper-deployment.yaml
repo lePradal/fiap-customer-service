@@ -13,9 +13,9 @@ spec:
         app: zookeeper
     spec:
       containers:
-        - env:
-            - name: ZOOKEEPER_CLIENT_PORT
-              value: "2181"
+        - envFrom:
+            - configMapRef:
+                name: zookeeper-config
           image: confluentinc/cp-zookeeper:7.5.0
           name: zookeeper
           ports:

@@ -11,10 +11,11 @@ services:
   kafka:
     container_name: kafka
     image: obsidiandynamics/kafka
-    restart: "no"
+    restart: "always"
     ports:
-      - "2181:2181"
       - "9092:9092"
+    depends_on:
+      - zookeeper
     networks:
       - kafka-network
     environment:
@@ -26,6 +27,7 @@ services:
       KAFKA_RESTART_ATTEMPTS: "10"
       KAFKA_RESTART_DELAY: "5"
       ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
     volumes:
       - ./data/kafka/data:/var/lib/kafka/data
 

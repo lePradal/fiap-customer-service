@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: tech-challenge-deployment
   labels:
-    app: tech-challenge_app
+    app: tech-challenge-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tech-challenge_app
+      app: tech-challenge-app
   template:
     metadata:
       labels:
-        app: tech-challenge_app
+        app: tech-challenge-app
     spec:
       initContainers:
         - name: wait-for-db
@@ -20,31 +20,33 @@ spec:
           command: [ 'sh', '-c', 'until nc -z db 5432; do echo "Aguardando banco..."; sleep 2; done' ]
       containers:
       - name: tech-challenge-app
-        image: tech-challenge_app:latest
+        image: tech-challenge-app:latest
         ports:
           - containerPort: 8080
         envFrom:
           - configMapRef:
               name: tech-challenge-config
           - secretRef:
-              name: tech-challenge-app-secrets
+              name: tech-challenge-secrets
         resources:
           requests:
-            cpu: "100m"
-            memory: "200Mi"
+            cpu: "250m"
+            memory: "256Mi"
           limits:
             cpu: "500m"
-            memory: "500Mi"
-#        livenessProbe:
-#          httpGet:
-#            path: /actuator/health
-#            port: 8080
-#          initialDelaySeconds: 30
-#          periodSeconds: 10
-#        readinessProbe:
-#          httpGet:
-#            path: /actuator/health
-#            port: 8080
-#          initialDelaySeconds: 10
-#          periodSeconds: 5
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /techchallenge/v1/actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /techchallenge/v1/actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 3
         imagePullPolicy: IfNotPresent

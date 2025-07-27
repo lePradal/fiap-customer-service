@@ -1,7 +1,9 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: tech-challenge-app-hpa
+  name: tech-challenge-hpa
+  labels:
+    app: tech-challenge-app
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

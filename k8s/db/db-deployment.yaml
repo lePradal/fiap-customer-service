@@ -13,13 +13,9 @@ spec:
         app: tech-challenge_db
     spec:
       containers:
-        - env:
-            - name: POSTGRES_DB
-              value: techchallenge
-            - name: POSTGRES_PASSWORD
-              value: postgres
-            - name: POSTGRES_USER
-              value: postgres
+        - envFrom:
+            - configMapRef:
+                name: db-config
           image: postgres:14
           name: db
           ports:
@@ -28,6 +24,16 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: db
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 5
+            periodSeconds: 5
       restartPolicy: Always
       volumes:
         - name: db
