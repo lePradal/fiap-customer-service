@@ -8,7 +8,7 @@ echo "⏳ Aguardando EXTERNAL-IP ser atribuído ao serviço '$SERVICE_NAME'..."
 
 EXTERNAL_IP=""
 for i in {1..20}; do
-  EXTERNAL_IP=$(kubectl get svc "$SERVICE_NAME" -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null)
+  EXTERNAL_IP=$(kubectl get svc "$SERVICE_NAME" -n "$KUBERNETES_NAMESPACE" -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null)
   if [[ -n "$EXTERNAL_IP" ]]; then
     break
   fi
