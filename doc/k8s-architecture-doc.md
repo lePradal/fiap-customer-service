@@ -14,9 +14,9 @@ Essa arquitetura Kubernetes feita especificamente para o projeto Techchallenge r
 
 ---
 
-### Desenho da solução
+### Desenho da solução técnica abstração
+![Diagrama da Arquitetura Kubernetes](Estrutura_Sistema_Lanchonete.png)
 
-![Diagrama da Arquitetura Kubernetes](k8s-architecture-diagram-final.png)
 
 ### ✅ Como a Arquitetura Resolve os Desafios
 
@@ -78,6 +78,9 @@ Essa arquitetura Kubernetes feita especificamente para o projeto Techchallenge r
 **Resolve:** Comunicação estável, escalável e segura
 
 ---
+### Abaixo a solução de toda arquitetura Kubernetes para resolver o problema de disponibilidade : 
+
+![Diagrama da Arquitetura Kubernetes](k8s-architecture-diagram-final.png)
 
 ## 🧰 Resumo dos Benefícios Técnicos
 
