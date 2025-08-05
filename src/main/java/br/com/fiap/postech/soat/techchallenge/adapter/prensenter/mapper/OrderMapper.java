@@ -40,7 +40,8 @@ public abstract class OrderMapper {
                 entity.getStatus(),
                 entity.getObservation(),
                 entity.getNumber(),
-                items
+                items,
+                entity.getCreationDate()
         );
     }
 
@@ -53,7 +54,8 @@ public abstract class OrderMapper {
                 order.getStatus(),
                 order.getObservation(),
                 order.getNumber(),
-                null
+                null,
+                order.getCreationDate()
         );
 
         List<OrderItemEntity> items = order.getItems() != null

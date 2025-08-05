@@ -2,6 +2,7 @@ package br.com.fiap.postech.soat.techchallenge.application.service;
 
 import br.com.fiap.postech.soat.techchallenge.application.exceptions.NotFoundException;
 import br.com.fiap.postech.soat.techchallenge.application.usercases.ManageProductUseCase;
+import br.com.fiap.postech.soat.techchallenge.application.exceptions.ProductAlreadyExistsException;
 import br.com.fiap.postech.soat.techchallenge.domain.models.Product;
 import br.com.fiap.postech.soat.techchallenge.domain.models.ProductCategory;
 import br.com.fiap.postech.soat.techchallenge.infrastructure.persistence.product.ProductRepository;
@@ -34,7 +35,16 @@ public class ManageProductService implements ManageProductUseCase {
     @Override
     public Product createProduct(String name, BigDecimal price, ProductCategory category, String description, String imageUrl) {
         log.info("Creating product with name: {}, price: {}, category: {}, description: {}, imageUrl: {}", name, price, category, description, imageUrl);
-        Product product = new Product(UUID.randomUUID(), name, price, category, description, true, imageUrl);
+        Product product = getProductByName(name);
+        if(product != null ){
+            if (!product.isActive()){
+                product.activate();
+                productRepository.save(product);
+            }
+            throw new ProductAlreadyExistsException("Product with name "+name+" already exists");
+        }
+        product = new Product(UUID.randomUUID(), name, price, category, description, true, imageUrl);
+
         productRepository.save(product);
         return product;
     }
@@ -67,5 +77,11 @@ public class ManageProductService implements ManageProductUseCase {
         Product product = getProductById(productId);
         product.deactivate();
         productRepository.save(product);
+    }
+
+    @Override
+    public Product getProductByName(String name) {
+        log.info("Fetching product with name: {}", name);
+        return productRepository.findByName(name).orElse(null);
     }
 }

@@ -15,4 +15,5 @@ public interface ManageProductUseCase {
     void deleteProduct(UUID productId);
     void activateProduct(UUID productId);
     void deactivateProduct(UUID productId);
+    Product getProductByName(String name);
 }

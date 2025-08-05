@@ -9,6 +9,7 @@ import br.com.fiap.postech.soat.techchallenge.adapter.gateway.OrderGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,7 +48,24 @@ public class OrderRepository implements OrderGateway {
     @Override
     public List<Order> findOrdersByFilters(OrderStatus status, UUID customerId) {
         List<OrderEntity> orderEntities = orderRepository.findAllByOptionalFilters(status, customerId);
-        return orderEntities.stream().map(orderMapper::toDomain).toList();
+//        return orderEntities.stream().map(orderMapper::toDomain).toList();
+        // Define a prioridade de ordenação externa
+        List<OrderStatus> statusPriority = List.of(
+                OrderStatus.READY,
+                OrderStatus.IN_PREPARATION,
+                OrderStatus.RECEIVED,
+                OrderStatus.AWAITING_PAYMENT
+        );
+
+        return orderEntities.stream()
+                .filter(order -> statusPriority.contains(order.getStatus()))
+                .sorted(Comparator
+                        .comparingInt((OrderEntity o) -> statusPriority.indexOf(o.getStatus()))
+                        .thenComparing(OrderEntity::getCreationDate, Comparator.reverseOrder())
+                )
+                .map(orderMapper::toDomain)
+                .toList();
+
     }
 
     @Override

@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "5d451e7b-d179-4152-870a-b98d1bdbdbbc",
+		"_postman_id": "ce420af9-c3db-43ce-b74d-731f8fb78c36",
 		"name": "TechChallenge - Product API",
 		"description": "Coleção Postman para testar a API de Products",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "8894085"
+		"_exporter_id": "30321921"
 	},
 	"item": [
 		{
@@ -69,10 +69,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "Category SANDWICH",
@@ -99,10 +99,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "Category DRINK",
@@ -125,10 +125,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "Category SIDE",
@@ -151,10 +151,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "Category DESSERT",
@@ -177,10 +177,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				},
@@ -476,10 +476,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"John Galt\",\r\n    \"phone\": \"11944568382\",\r\n    \"cpf\": \"77898682840\",\r\n    \"email\": \"john.galt@galtvalley.com\"\r\n}"
-								},
 								"url": {
 									"raw": "{{tech_challenge_url}}/orders?customerId={{customerId}}",
 									"host": [
@@ -496,20 +492,16 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "Get Orders by Status RECEIVED",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"John Galt\",\r\n    \"phone\": \"11944568382\",\r\n    \"cpf\": \"77898682840\",\r\n    \"email\": \"john.galt@galtvalley.com\"\r\n}"
-								},
 								"url": {
 									"raw": "{{tech_challenge_url}}/orders?status=RECEIVED",
 									"host": [
@@ -526,7 +518,7 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [
 								{
@@ -540,10 +532,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"John Galt\",\r\n    \"phone\": \"11944568382\",\r\n    \"cpf\": \"77898682840\",\r\n    \"email\": \"john.galt@galtvalley.com\"\r\n}"
-								},
 								"url": {
 									"raw": "{{tech_challenge_url}}/orders?status=IN_PREPARATION",
 									"host": [
@@ -560,7 +548,7 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [
 								{
@@ -574,10 +562,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"John Galt\",\r\n    \"phone\": \"11944568382\",\r\n    \"cpf\": \"77898682840\",\r\n    \"email\": \"john.galt@galtvalley.com\"\r\n}"
-								},
 								"url": {
 									"raw": "{{tech_challenge_url}}/orders?status=READY",
 									"host": [
@@ -594,7 +578,7 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [
 								{
@@ -608,10 +592,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"John Galt\",\r\n    \"phone\": \"11944568382\",\r\n    \"cpf\": \"77898682840\",\r\n    \"email\": \"john.galt@galtvalley.com\"\r\n}"
-								},
 								"url": {
 									"raw": "{{tech_challenge_url}}/orders?status=FINALIZED",
 									"host": [
@@ -628,7 +608,7 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [
 								{
@@ -642,10 +622,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"John Galt\",\r\n    \"phone\": \"11944568382\",\r\n    \"cpf\": \"77898682840\",\r\n    \"email\": \"john.galt@galtvalley.com\"\r\n}"
-								},
 								"url": {
 									"raw": "{{tech_challenge_url}}/orders?customerId={{customerId}}&status=IN_PREPARATION",
 									"host": [
@@ -666,10 +642,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				},
@@ -724,6 +700,28 @@
 							],
 							"path": [
 								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checkout ",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{tech_challenge_url}}/orders/checkout/{{orderId}}",
+							"host": [
+								"{{tech_challenge_url}}"
+							],
+							"path": [
+								"orders",
+								"checkout",
 								"{{orderId}}"
 							]
 						}

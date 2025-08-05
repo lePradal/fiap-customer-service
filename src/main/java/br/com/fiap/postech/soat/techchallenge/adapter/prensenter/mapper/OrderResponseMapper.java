@@ -23,7 +23,7 @@ public interface OrderResponseMapper {
 
     default OrderResponse toResponse(@NotNull Order order) {
         //TODO definir total de itens
-        return new OrderResponse(order.getId(), order.getCustomer().getName(), order.getCustomer().getCpf(), order.getStatus(), order.getNumber(), toOrderItemResponse(order.getItems()));
+        return new OrderResponse(order.getId(), order.getCustomer().getName(), order.getCustomer().getCpf(), order.getStatus(), order.getNumber(), toOrderItemResponse(order.getItems()), order.getCreationDate());
     }
 
     default List<OrderItemResponse> toOrderItemResponse(List<OrderItem> ordersItems) {

@@ -12,4 +12,10 @@ public class ProductSpecification {
     public static Specification<ProductEntity> isActive(Boolean active) {
         return (root, query, cb) -> cb.equal(root.get("active"), active);
     }
+
+    public static Specification<ProductEntity> hasName(String name) {
+        return (root, query, cb) ->
+                cb.equal(cb.lower(root.get("name")), name.toLowerCase());
+    }
+
 }

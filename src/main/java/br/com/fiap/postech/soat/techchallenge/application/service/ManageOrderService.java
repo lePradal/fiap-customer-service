@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ public class ManageOrderService implements ManageOrderUseCase {
 
         UUID customerId = (createOrderCommand.customerId() == null) ? UUID.fromString("dc821e5c-894a-4bdf-bded-e97b2657cb5a") : createOrderCommand.customerId();
         Customer customer = manageCustomerUseCase.getCustomerById(customerId);
-        Order order = new Order(UUID.randomUUID(), customer, OrderStatus.AWAITING_PAYMENT, createOrderCommand.observation(), nextOrderNumber, orderItems);
+        Order order = new Order(UUID.randomUUID(), customer, OrderStatus.AWAITING_PAYMENT, createOrderCommand.observation(), nextOrderNumber, orderItems, LocalDateTime.now());
 
         orderGateway.save(order);
         orderItemUseCase.createOrderItems(orderItems, order);
