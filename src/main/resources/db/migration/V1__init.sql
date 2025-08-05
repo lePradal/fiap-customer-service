@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS orders
     customer_id UUID              NOT NULL REFERENCES customers (id),
     status      order_status_enum NOT NULL DEFAULT 'AWAITING_PAYMENT',
     observation TEXT,
-    number      INTEGER           NOT NULL
+    number      INTEGER           NOT NULL,
+    creation_date TIMESTAMP       NOT NULL DEFAULT NOW()
 );
 
 -- Tabela de itens do pedido
