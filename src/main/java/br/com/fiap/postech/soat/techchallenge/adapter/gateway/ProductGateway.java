@@ -12,4 +12,5 @@ public interface ProductGateway {
     Optional<Product> findById(UUID id);
     void deleteById(UUID id);
     List<Product> findByFilters(ProductCategory category, Boolean active);
+    Optional<Product> findByName(String name);
 }

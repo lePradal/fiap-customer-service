@@ -4,6 +4,7 @@ import br.com.fiap.postech.soat.techchallenge.domain.exceptions.InvalidEmailExce
 import br.com.fiap.postech.soat.techchallenge.domain.exceptions.InvalidIdException;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,14 +16,16 @@ public class Order {
     private String observation;
     private Integer number;
     private List<OrderItem> items;
+    private LocalDateTime creationDate;
 
-    public Order(UUID id, Customer customer, OrderStatus status, String observation, Integer number, List<OrderItem> items) {
+    public Order(UUID id, Customer customer, OrderStatus status, String observation, Integer number, List<OrderItem> items, LocalDateTime creationDate) {
         this.setId(id);
         this.setCustomer(customer);
         this.setStatus(status);
         this.setObservation(observation);
         this.setNumber(number);
         this.setItems(items);
+        this.setCreationDate(creationDate);
     }
 
     public Integer getNumber() {
@@ -90,4 +93,11 @@ public class Order {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
 }

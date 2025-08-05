@@ -53,4 +53,10 @@ public class ProductRepository implements ProductGateway {
 
         return products;
     }
+
+    @Override
+    public Optional<Product> findByName(String name) {
+        return repository.findOne(ProductSpecification.hasName(name))
+                .map(mapper::toDomain);
+    }
 }
