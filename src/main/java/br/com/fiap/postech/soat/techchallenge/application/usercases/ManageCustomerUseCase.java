@@ -1,6 +1,6 @@
 package br.com.fiap.postech.soat.techchallenge.application.usercases;
 
-import br.com.fiap.postech.soat.techchallenge.domain.models.Customer;
+import br.com.fiap.postech.soat.techchallenge.model.domain.Customer;
 
 import java.util.UUID;
 
