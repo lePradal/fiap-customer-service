@@ -7,11 +7,9 @@ import lombok.Setter;
 @Setter
 public class SimpleError {
 
-    private String field;
     private String message;
 
-    public SimpleError(String field, String message) {
-        this.field = field;
+    public SimpleError(String message) {
         this.message = message;
     }
 }

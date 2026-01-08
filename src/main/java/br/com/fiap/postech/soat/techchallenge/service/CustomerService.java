@@ -3,12 +3,12 @@ package br.com.fiap.postech.soat.techchallenge.service;
 import br.com.fiap.postech.soat.techchallenge.application.exceptions.CustomerAlreadyExistsException;
 import br.com.fiap.postech.soat.techchallenge.application.exceptions.NotFoundException;
 import br.com.fiap.postech.soat.techchallenge.model.mapper.CustomerMapper;
-import br.com.fiap.postech.soat.techchallenge.model.domain.Customer;
 import br.com.fiap.postech.soat.techchallenge.model.dto.response.CustomerResponse;
 import br.com.fiap.postech.soat.techchallenge.persistence.CustomerEntity;
-import br.com.fiap.postech.soat.techchallenge.persistence.JpaManageCustomerRepository;
+import br.com.fiap.postech.soat.techchallenge.persistence.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,9 +17,11 @@ import java.util.UUID;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class ManageCustomerService{
+public class CustomerService {
 
-    private JpaManageCustomerRepository repository;
+    @Autowired
+    private CustomerRepository repository;
+    @Autowired
     private CustomerMapper mapper;
 
     public Optional<CustomerResponse> getCustomerById(UUID customerId) {
