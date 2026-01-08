@@ -70,4 +70,4 @@ jobs:
         run: docker build -t ms-customer:latest .
 
       - name: Deploy
-        run: echo "Deploy executado com sucesso"
+        run: echo "Deploy executado com sucesso!"

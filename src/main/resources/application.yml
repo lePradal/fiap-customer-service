@@ -8,10 +8,6 @@ spring:
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
-  flyway:
-    mixed: true
-    clean-disabled: false
-    baseline-on-migrate: true
   jpa:
     hibernate:
       ddl-auto: update
@@ -51,12 +47,6 @@ springdoc:
   swagger-ui:
     enabled: ${SWAGGER_ENABLED:true}
     path: ${SWAGGER_UI_PATH:/swagger-ui}
-
-mercado-pago:
-  access-token: APP_USR-1131579974414437-053021-157504008fa8e28304d4b2560b3cf474-2466834857
-  collector-id: 2466834857
-  pos-id: CaixaPOS1
-  notification-url: ${NOTIFICATION_URL:https://f0c2-2804-1b3-aa83-b1ee-5de8-e154-a7d9-6180.ngrok-free.app}
 
 logging:
   level:
