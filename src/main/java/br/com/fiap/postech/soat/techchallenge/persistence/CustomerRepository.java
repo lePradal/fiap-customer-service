@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface JpaManageCustomerRepository extends JpaRepository<CustomerEntity, UUID>, JpaSpecificationExecutor<CustomerEntity> {
     Optional<CustomerEntity> findByCpf(String cpf);
+    void deleteByCpf(String cpf);
 }
