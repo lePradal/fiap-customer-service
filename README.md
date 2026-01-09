@@ -84,7 +84,7 @@ Isso irá subir o banco na porta `5432`.
 Com a aplicação rodando, você pode acessar os endpoints no Postman ou navegador:
 
 ```
-http://localhost:8080/techchallenge/v1/customers
+http://localhost:8080/techchallenge/v1/products
 ```
 
 ---
@@ -101,7 +101,9 @@ Eles seguem o padrão `V<numero>__descricao.sql`, por exemplo:
 
 ```
 V1__init.sql
-V2__insert_customers.sql
+V2__insert_initial_product.sql
+V3__insert_initial_customers.sql
+V4__insert_into_order_items.sql
 ```
 
 ---

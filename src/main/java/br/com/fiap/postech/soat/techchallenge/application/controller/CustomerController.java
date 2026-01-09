@@ -3,15 +3,15 @@ package br.com.fiap.postech.soat.techchallenge.application.controller;
 import br.com.fiap.postech.soat.techchallenge.application.api.CustomerAPI;
 import br.com.fiap.postech.soat.techchallenge.model.dto.request.CreateCustomerRequest;
 import br.com.fiap.postech.soat.techchallenge.model.dto.response.CustomerResponse;
-import br.com.fiap.postech.soat.techchallenge.model.mapper.CustomerResponseMapper;
-import br.com.fiap.postech.soat.techchallenge.service.CustomerService;
+import br.com.fiap.postech.soat.techchallenge.mapper.CustomerResponseMapper;
+import br.com.fiap.postech.soat.techchallenge.model.domain.Customer;
+import br.com.fiap.postech.soat.techchallenge.application.usercases.ManageCustomerUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -19,37 +19,31 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CustomerController implements CustomerAPI {
 
-    private final CustomerService service;
+    private final ManageCustomerUseCase useCase;
     private final CustomerResponseMapper responseMapper;
 
     @Operation(summary = "Customer registration")
     @Override
     public ResponseEntity<CustomerResponse> createCustomer(CreateCustomerRequest customerRequest) {
-        CustomerResponse customer = service.createCustomer(customerRequest.name(), customerRequest.cpf(), customerRequest.email(), customerRequest.phone());
-        return ResponseEntity.ok(customer);
+        Customer customer = useCase.createCustomer(customerRequest.name(), customerRequest.cpf(), customerRequest.email(), customerRequest.phone());
+        CustomerResponse response = responseMapper.toResponse(customer);
+
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Search customer by ID")
     @Override
-    public ResponseEntity<Optional<CustomerResponse>> getById(UUID id) {
-        Optional<CustomerResponse> customer = service.getCustomerById(id);
-        return ResponseEntity.ok(customer);
+    public ResponseEntity<CustomerResponse> getById(UUID id) {
+        Customer customer = useCase.getCustomerById(id);
+        CustomerResponse response = responseMapper.toResponse(customer);
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Search customer by CPF")
     @Override
     public ResponseEntity<CustomerResponse> getByCpf(String cpf) {
-        CustomerResponse customer = service.getCustomerByCpf(cpf);
-        return ResponseEntity.ok(customer);
-
-        
-    }
-
-    @Operation(summary = "Delete customer by CPF")
-    @Override
-    public ResponseEntity<Void> deleteCustomer(String cpf){
-        service.deleteCustomer(cpf);
-
-        return ResponseEntity.noContent().build();
+        Customer customer = useCase.getCustomerByCpf(cpf);
+        CustomerResponse response = responseMapper.toResponse(customer);
+        return ResponseEntity.ok(response);
     }
 }

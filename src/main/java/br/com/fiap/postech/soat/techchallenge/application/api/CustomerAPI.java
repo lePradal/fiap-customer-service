@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RequestMapping("/customers")
@@ -16,11 +15,8 @@ public interface CustomerAPI {
     ResponseEntity<CustomerResponse> createCustomer(@Valid @RequestBody CreateCustomerRequest customerRequest);
 
     @GetMapping("/{id}")
-    ResponseEntity<Optional<CustomerResponse>> getById(@PathVariable UUID id);
+    ResponseEntity<CustomerResponse> getById(@PathVariable UUID id);
 
-    @GetMapping("/cpf/{cpf}")
-    ResponseEntity<CustomerResponse> getByCpf(@PathVariable String cpf);
-
-    @DeleteMapping("{cpf}")
-    ResponseEntity<Void> deleteCustomer(@PathVariable String cpf);
+    @GetMapping
+    ResponseEntity<CustomerResponse> getByCpf(@RequestParam String cpf);
 }
