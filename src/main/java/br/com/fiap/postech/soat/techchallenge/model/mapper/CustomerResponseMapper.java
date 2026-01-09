@@ -1,4 +1,4 @@
-package br.com.fiap.postech.soat.techchallenge.mapper;
+package br.com.fiap.postech.soat.techchallenge.model.mapper;
 
 import br.com.fiap.postech.soat.techchallenge.model.dto.response.CustomerResponse;
 import br.com.fiap.postech.soat.techchallenge.model.domain.Customer;

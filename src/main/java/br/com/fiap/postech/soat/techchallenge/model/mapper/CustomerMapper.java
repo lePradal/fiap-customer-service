@@ -1,5 +1,6 @@
-package br.com.fiap.postech.soat.techchallenge.mapper;
+package br.com.fiap.postech.soat.techchallenge.model.mapper;
 
+import br.com.fiap.postech.soat.techchallenge.model.dto.response.CustomerResponse;
 import br.com.fiap.postech.soat.techchallenge.persistence.CustomerEntity;
 import br.com.fiap.postech.soat.techchallenge.model.domain.Customer;
 import org.mapstruct.Mapper;
@@ -21,5 +22,9 @@ public interface CustomerMapper {
     default CustomerEntity toEntity(Customer customer){
         if (customer == null) return null;
         return new CustomerEntity(customer.getId(), customer.getName(), customer.getCpf(), customer.getEmail(), customer.getPhone());
+    }
+
+    default CustomerResponse toResponse(Optional<CustomerEntity> customer){
+        return customer.map(customerEntity -> new CustomerResponse(customerEntity.getId(), customerEntity.getName(), customerEntity.getCpf(), customerEntity.getEmail(), customerEntity.getPhone())).orElse(null);
     }
 }
