@@ -5,7 +5,8 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:default}
   data:
     mongodb:
-      uri: mongodb://mongo:27017/customerdb
+      uri: mongodb://localhost:27017/customerdb
+      auto-index-creation: true
   messages:
     basename: messages
   management:
