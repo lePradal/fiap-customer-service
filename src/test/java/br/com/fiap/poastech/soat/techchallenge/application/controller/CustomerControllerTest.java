@@ -33,7 +33,7 @@ class CustomerControllerTest {
     @Test
     void createCustomer_returnsOk() {
         CreateCustomerRequest req = new CreateCustomerRequest("Nome","123","a@b.com","119");
-        CustomerResponse resp = new CustomerResponse(UUID.randomUUID(), "Nome","123","a@b.com","119");
+        CustomerResponse resp = new CustomerResponse(String.valueOf(UUID.randomUUID()), "Nome","123","a@b.com","119");
 
         when(service.createCustomer(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())).thenReturn(resp);
 
@@ -46,7 +46,7 @@ class CustomerControllerTest {
     @Test
     void getById_returnsOptional() {
         UUID id = UUID.randomUUID();
-        CustomerResponse resp = new CustomerResponse(id, "Nome","123","a@b.com","119");
+        CustomerResponse resp = new CustomerResponse(String.valueOf(id), "Nome","123","a@b.com","119");
         when(service.getCustomerById(id)).thenReturn(Optional.of(resp));
 
         var result = controller.getById(id);
@@ -58,7 +58,7 @@ class CustomerControllerTest {
 
     @Test
     void getByCpf_returnsOk() {
-        CustomerResponse resp = new CustomerResponse(UUID.randomUUID(), "Nome","123","a@b.com","119");
+        CustomerResponse resp = new CustomerResponse(String.valueOf(UUID.randomUUID()), "Nome","123","a@b.com","119");
         when(service.getCustomerByCpf("123")).thenReturn(resp);
 
         var result = controller.getByCpf("123");

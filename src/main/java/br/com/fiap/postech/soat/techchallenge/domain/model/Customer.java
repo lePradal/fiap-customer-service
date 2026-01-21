@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Customer {
 
     @NotBlank
-    private UUID id;
+    private String id;
 
     @NotBlank(message = "{customer.name.notblank}")
     private String name;

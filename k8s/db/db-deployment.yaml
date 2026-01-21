@@ -16,10 +16,10 @@ spec:
         - envFrom:
             - configMapRef:
                 name: db-config
-          image: postgres:14
+          image: mongo:7
           name: db
           ports:
-            - containerPort: 5432
+            - containerPort: 27017
               protocol: TCP
           volumeMounts:
             - mountPath: /var/lib/postgresql/data

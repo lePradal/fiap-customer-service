@@ -4,7 +4,7 @@ import br.com.fiap.postech.soat.techchallenge.application.exceptions.CustomerAlr
 import br.com.fiap.postech.soat.techchallenge.application.exceptions.NotFoundException;
 import br.com.fiap.postech.soat.techchallenge.domain.mapper.CustomerMapper;
 import br.com.fiap.postech.soat.techchallenge.application.dto.response.CustomerResponse;
-import br.com.fiap.postech.soat.techchallenge.infraestructure.persistence.CustomerEntity;
+import br.com.fiap.postech.soat.techchallenge.infraestructure.persistence.CustomerDocument;
 import br.com.fiap.postech.soat.techchallenge.infraestructure.persistence.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,7 +26,7 @@ public class CustomerService {
 
     public Optional<CustomerResponse> getCustomerById(UUID customerId) {
         log.info("Fetching customer with ID: {}", customerId);
-        Optional<CustomerEntity> entity = repository.findById(customerId);
+        Optional<CustomerDocument> entity = repository.findById(customerId);
 
         entity.orElseThrow(() -> new NotFoundException("Customer not found."));
 
@@ -35,7 +35,7 @@ public class CustomerService {
 
     public CustomerResponse getCustomerByCpf(String cpf) {
         log.info("Fetching customer with CPF: {}", cpf);
-        Optional<CustomerEntity> byCpf = repository.findByCpf(cpf);
+        Optional<CustomerDocument> byCpf = repository.findByCpf(cpf);
         byCpf.orElseThrow(() -> new NotFoundException("Customer not found."));
         return mapper.toResponse(byCpf);
     }
@@ -43,12 +43,12 @@ public class CustomerService {
     public CustomerResponse createCustomer(String name, String cpf, String email, String phone) {
         log.info("Creating customer with CPF: {}", cpf);
 
-        Optional<CustomerEntity> existingCustomer = repository.findByCpf(cpf);
+        Optional<CustomerDocument> existingCustomer = repository.findByCpf(cpf);
         if (existingCustomer.isPresent()) {
             throw new CustomerAlreadyExistsException("Customer with CPF " + cpf + " already exists.");
         }
 
-        CustomerEntity customer = new CustomerEntity(UUID.randomUUID(), name, cpf, email, phone);
+        CustomerDocument customer = new CustomerDocument(String.valueOf(UUID.randomUUID()), name, cpf, email, phone);
         repository.save(customer);
         return mapper.toResponse(Optional.of(customer));
     }

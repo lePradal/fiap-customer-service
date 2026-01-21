@@ -3,15 +3,13 @@ package br.com.fiap.poastech.soat.techchallenge.model.domain;
 import br.com.fiap.postech.soat.techchallenge.domain.model.Customer;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CustomerTest {
 
     @Test
     void gettersAndSetters() {
-        UUID id = UUID.randomUUID();
+        String id = "ba8ac0a7-07a9-4ab6-9041-ebddd476a214";
         Customer c = new Customer();
         c.setId(id);
         c.setName("Nome");

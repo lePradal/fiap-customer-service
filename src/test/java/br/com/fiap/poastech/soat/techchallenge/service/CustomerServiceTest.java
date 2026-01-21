@@ -4,7 +4,7 @@ import br.com.fiap.postech.soat.techchallenge.application.exceptions.CustomerAlr
 import br.com.fiap.postech.soat.techchallenge.application.exceptions.NotFoundException;
 import br.com.fiap.postech.soat.techchallenge.application.dto.response.CustomerResponse;
 import br.com.fiap.postech.soat.techchallenge.domain.mapper.CustomerMapper;
-import br.com.fiap.postech.soat.techchallenge.infraestructure.persistence.CustomerEntity;
+import br.com.fiap.postech.soat.techchallenge.infraestructure.persistence.CustomerDocument;
 import br.com.fiap.postech.soat.techchallenge.infraestructure.persistence.CustomerRepository;
 import br.com.fiap.postech.soat.techchallenge.application.service.CustomerService;
 import org.junit.jupiter.api.Test;
@@ -38,12 +38,12 @@ class CustomerServiceTest {
     @Test
     void deveBuscarClientePorCpf() {
         UUID id = UUID.randomUUID();
-        CustomerEntity entity = new CustomerEntity(id, "Maria Eduarda", "68747772034", "maria.eduarda@domain.com", "11987654321");
+        CustomerDocument entity = new CustomerDocument(String.valueOf(id), "Maria Eduarda", "68747772034", "maria.eduarda@domain.com", "11987654321");
 
         when(repository.findByCpf("68747772034")).thenReturn(Optional.of(entity));
-        when(mapper.toResponse(ArgumentMatchers.<Optional<CustomerEntity>>any())).thenAnswer(invocation -> {
-            Optional<CustomerEntity> opt = invocation.getArgument(0);
-            CustomerEntity e = opt.orElse(null);
+        when(mapper.toResponse(ArgumentMatchers.<Optional<CustomerDocument>>any())).thenAnswer(invocation -> {
+            Optional<CustomerDocument> opt = invocation.getArgument(0);
+            CustomerDocument e = opt.orElse(null);
             return e == null ? null : new CustomerResponse(e.getId(), e.getName(), e.getCpf(), e.getEmail(), e.getPhone());
         });
 
@@ -65,12 +65,12 @@ class CustomerServiceTest {
     @Test
     void deveBuscarPorId() {
         UUID id = UUID.randomUUID();
-        CustomerEntity entity = new CustomerEntity(id, "Maria Eduarda", "68747772034", "maria.eduarda@domain.com", "11987654321");
+        CustomerDocument entity = new CustomerDocument(String.valueOf(id), "Maria Eduarda", "68747772034", "maria.eduarda@domain.com", "11987654321");
 
         when(repository.findById(id)).thenReturn(Optional.of(entity));
-        when(mapper.toResponse(ArgumentMatchers.<Optional<CustomerEntity>>any())).thenAnswer(invocation -> {
-            Optional<CustomerEntity> opt = invocation.getArgument(0);
-            CustomerEntity e = opt.orElse(null);
+        when(mapper.toResponse(ArgumentMatchers.<Optional<CustomerDocument>>any())).thenAnswer(invocation -> {
+            Optional<CustomerDocument> opt = invocation.getArgument(0);
+            CustomerDocument e = opt.orElse(null);
             return e == null ? null : new CustomerResponse(e.getId(), e.getName(), e.getCpf(), e.getEmail(), e.getPhone());
         });
 
@@ -83,10 +83,10 @@ class CustomerServiceTest {
     @Test
     void deveCriarClienteQuandoNaoExiste() {
         when(repository.findByCpf("68747772034")).thenReturn(Optional.empty());
-        when(repository.save(ArgumentMatchers.any(CustomerEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        when(mapper.toResponse(ArgumentMatchers.<Optional<CustomerEntity>>any())).thenAnswer(invocation -> {
-            Optional<CustomerEntity> opt = invocation.getArgument(0);
-            CustomerEntity e = opt.orElse(null);
+        when(repository.save(ArgumentMatchers.any(CustomerDocument.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(mapper.toResponse(ArgumentMatchers.<Optional<CustomerDocument>>any())).thenAnswer(invocation -> {
+            Optional<CustomerDocument> opt = invocation.getArgument(0);
+            CustomerDocument e = opt.orElse(null);
             return e == null ? null : new CustomerResponse(e.getId(), e.getName(), e.getCpf(), e.getEmail(), e.getPhone());
         });
 
@@ -94,12 +94,12 @@ class CustomerServiceTest {
 
         assertThat(result).isNotNull();
         assertThat(result.cpf()).isEqualTo("68747772034");
-        verify(repository).save(ArgumentMatchers.any(CustomerEntity.class));
+        verify(repository).save(ArgumentMatchers.any(CustomerDocument.class));
     }
 
     @Test
     void deveLancarErroQuandoClienteJaExiste() {
-        CustomerEntity entity = new CustomerEntity(UUID.randomUUID(), "Maria Eduarda", "68747772034", "maria.eduarda@domain.com", "11987654321");
+        CustomerDocument entity = new CustomerDocument(String.valueOf(UUID.randomUUID()), "Maria Eduarda", "68747772034", "maria.eduarda@domain.com", "11987654321");
 
         when(repository.findByCpf("68747772034")).thenReturn(Optional.of(entity));
 

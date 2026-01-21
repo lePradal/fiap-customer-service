@@ -4,8 +4,8 @@ metadata:
   name: db
 spec:
   ports:
-    - name: "5432"
-      port: 5432
-      targetPort: 5432
+    - name: "27017"
+      port: 27017
+      targetPort: 27017
   selector:
     app: tech-challenge_db

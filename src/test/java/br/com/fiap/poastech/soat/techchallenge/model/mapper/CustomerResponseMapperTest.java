@@ -5,8 +5,6 @@ import br.com.fiap.postech.soat.techchallenge.application.dto.response.CustomerR
 import br.com.fiap.postech.soat.techchallenge.domain.mapper.CustomerResponseMapper;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CustomerResponseMapperTest {
@@ -15,7 +13,7 @@ class CustomerResponseMapperTest {
 
     @Test
     void deveMapearEntityParaResponse() {
-        UUID id = UUID.randomUUID();
+        String id = "ba8ac0a7-07a9-4ab6-9041-ebddd476a214";
         Customer customer = new Customer(id, "Maria Eduarda", "123", "maria.eduarda@domain.com", "11987654321");
 
         CustomerResponse response = mapper.toResponse(customer);
