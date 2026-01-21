@@ -1,41 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db
+  name: mongo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tech-challenge_db
+      app: mongo
   template:
     metadata:
       labels:
-        app: tech-challenge_db
+        app: mongo
     spec:
       containers:
-        - envFrom:
-            - configMapRef:
-                name: db-config
-          image: postgres:14
-          name: db
+        - name: mongo
+          image: mongo:7
           ports:
-            - containerPort: 5432
+            - containerPort: 27017
               protocol: TCP
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: db
-          livenessProbe:
-            tcpSocket:
-              port: 5432
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            tcpSocket:
-              port: 5432
-            initialDelaySeconds: 5
-            periodSeconds: 5
-      restartPolicy: Always
+            - mountPath: /data/db
+              name: mongo-sorage
       volumes:
-        - name: db
+        - name: mongo-storage
           persistentVolumeClaim:
-            claimName: db
+            claimName: mongo-pvc

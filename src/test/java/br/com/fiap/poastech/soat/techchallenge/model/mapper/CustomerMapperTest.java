@@ -3,11 +3,10 @@ package br.com.fiap.poastech.soat.techchallenge.model.mapper;
 import br.com.fiap.postech.soat.techchallenge.domain.model.Customer;
 import br.com.fiap.postech.soat.techchallenge.application.dto.response.CustomerResponse;
 import br.com.fiap.postech.soat.techchallenge.domain.mapper.CustomerMapper;
-import br.com.fiap.postech.soat.techchallenge.infraestructure.persistence.CustomerEntity;
+import br.com.fiap.postech.soat.techchallenge.infraestructure.persistence.CustomerDocument;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,9 +16,10 @@ public class CustomerMapperTest {
 
     @Test
     void deveMapearRequestParaEntity() {
-        Customer customer = new Customer(UUID.randomUUID(), "Maria Eduarda", "68747772034", "maria.eduarda@domain.com", "11987654321");
+        String id = "ba8ac0a7-07a9-4ab6-9041-ebddd476a214";
+        Customer customer = new Customer(id, "Maria Eduarda", "68747772034", "maria.eduarda@domain.com", "11987654321");
 
-        CustomerEntity entity = mapper.toEntity(customer);
+        CustomerDocument entity = mapper.toEntity(customer);
 
         assertThat(entity).isNotNull();
         assertThat(entity.getCpf()).isEqualTo("68747772034");
@@ -30,14 +30,14 @@ public class CustomerMapperTest {
 
     @Test
     void deveRetornarNullAoMapearEntityQuandoInputNull() {
-        CustomerEntity entity = mapper.toEntity(null);
+        CustomerDocument entity = mapper.toEntity(null);
         assertThat(entity).isNull();
     }
 
     @Test
     void deveMapearEntityParaResponseQuandoPresente() {
-        UUID id = UUID.randomUUID();
-        CustomerEntity entity = new CustomerEntity(id, "Joao", "11122233344", "joao@dominio.com", "11999999999");
+        String id = "ba8ac0a7-07a9-4ab6-9041-ebddd476a214";
+        CustomerDocument entity = new CustomerDocument(id, "Joao", "11122233344", "joao@dominio.com", "11999999999");
 
         CustomerResponse response = mapper.toResponse(Optional.of(entity));
 
@@ -55,8 +55,8 @@ public class CustomerMapperTest {
 
     @Test
     void deveMapearEntityParaDomainQuandoPresente() {
-        UUID id = UUID.randomUUID();
-        CustomerEntity entity = new CustomerEntity(id, "Ana", "99988877766", "ana@dominio.com", "11912345678");
+        String id = "ba8ac0a7-07a9-4ab6-9041-ebddd476a214";
+        CustomerDocument entity = new CustomerDocument(id, "Ana", "99988877766", "ana@dominio.com", "11912345678");
 
         Optional<Customer> domain = mapper.toDomain(Optional.of(entity));
 
